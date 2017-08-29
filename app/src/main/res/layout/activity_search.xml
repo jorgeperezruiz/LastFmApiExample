@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context="com.lastfm.akudreams.lastfmtest.SearchActivity">
 
-  <TextView
-    android:layout_width="wrap_content"
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/appbar"
+    android:layout_width="match_parent"
+    app:elevation="0dp"
     android:layout_height="wrap_content"
-    android:text="Hello World!"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    android:background="@android:color/transparent">
 
-</android.support.constraint.ConstraintLayout>
+    <com.arlib.floatingsearchview.FloatingSearchView
+      android:id="@+id/floating_search_view"
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+      app:floatingSearch_close_search_on_keyboard_dismiss="false"
+      app:floatingSearch_dimBackground="false"
+      app:floatingSearch_dismissOnOutsideTouch="true"
+      app:floatingSearch_leftActionMode="showSearch"
+      app:floatingSearch_searchBarMarginLeft="@dimen/padding"
+      app:floatingSearch_searchBarMarginRight="@dimen/padding"
+      app:floatingSearch_searchHint="@string/action_search_hint"
+      app:floatingSearch_showSearchKey="true"
+      app:floatingSearch_suggestionsListAnimDuration="250"
+      app:layout_scrollFlags="scroll|enterAlways" />
+
+  </android.support.design.widget.AppBarLayout>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/albums_recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>

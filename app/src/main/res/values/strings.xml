@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">LastFmTest</string>
+  <string name="action_search_hint">Album name</string>
 </resources>
