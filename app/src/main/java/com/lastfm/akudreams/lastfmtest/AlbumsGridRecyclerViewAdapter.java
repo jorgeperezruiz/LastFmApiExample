@@ -1,5 +1,8 @@
 package com.lastfm.akudreams.lastfmtest;
 
+import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +13,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lastfm.akudreams.lastfmtest.models.Album;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.lastfm.akudreams.lastfmtest.AlbumActivity.ALBUM_ARG;
 
 public class AlbumsGridRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -67,6 +74,12 @@ public class AlbumsGridRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             if (album.getImages().size() > 2) {
                 Glide.with(albumImageView.getContext()).load(album.getImages().get(1).getUrl()).into(albumImageView);
             }
+
+            itemView.setOnClickListener(view -> {
+                Intent intent = new Intent(itemView.getContext(), AlbumActivity.class);
+                intent.putExtra(ALBUM_ARG, Parcels.wrap(album));
+                itemView.getContext().startActivity(intent);
+            });
         }
 
     }

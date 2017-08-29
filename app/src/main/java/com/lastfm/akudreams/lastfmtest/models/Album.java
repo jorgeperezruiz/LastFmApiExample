@@ -2,8 +2,11 @@ package com.lastfm.akudreams.lastfmtest.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel
 public class Album {
     @SerializedName("name")
     private String name;

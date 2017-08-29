@@ -2,6 +2,9 @@ package com.lastfm.akudreams.lastfmtest.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class AlbumImage {
 
     @SerializedName("#text")

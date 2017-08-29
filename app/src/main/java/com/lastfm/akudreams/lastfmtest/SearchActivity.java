@@ -26,7 +26,7 @@ public class SearchActivity extends AppCompatActivity implements SearchAlbumList
 
         RecyclerView albumsGridView = findViewById(R.id.albums_recyclerView);
         albumsAdapter = new AlbumsGridRecyclerViewAdapter();
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(getResources().getInteger(R.integer.columns), StaggeredGridLayoutManager.VERTICAL);
         albumsGridView.setLayoutManager(layoutManager);
         albumsGridView.setAdapter(albumsAdapter);
 
@@ -46,7 +46,6 @@ public class SearchActivity extends AppCompatActivity implements SearchAlbumList
 
     @Override
     public void onAlbumsLoaded(List<Album> albums) {
-        Log.d(SearchActivity.this.toString(), "Loaded albums " + albums.size());
         albumsAdapter.add(albums);
     }
 }
