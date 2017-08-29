@@ -2,6 +2,8 @@ package com.lastfm.akudreams.lastfmtest;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
@@ -12,6 +14,8 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity implements SearchAlbumListener {
 
+    private AlbumsGridRecyclerViewAdapter albumsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +23,12 @@ public class SearchActivity extends AppCompatActivity implements SearchAlbumList
 
         FloatingSearchView searchView = findViewById(R.id.floating_search_view);
         searchView.setOnSearchListener(onSearchListener);
+
+        RecyclerView albumsGridView = findViewById(R.id.albums_recyclerView);
+        albumsAdapter = new AlbumsGridRecyclerViewAdapter();
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        albumsGridView.setLayoutManager(layoutManager);
+        albumsGridView.setAdapter(albumsAdapter);
 
     }
 
@@ -37,5 +47,6 @@ public class SearchActivity extends AppCompatActivity implements SearchAlbumList
     @Override
     public void onAlbumsLoaded(List<Album> albums) {
         Log.d(SearchActivity.this.toString(), "Loaded albums " + albums.size());
+        albumsAdapter.add(albums);
     }
 }
