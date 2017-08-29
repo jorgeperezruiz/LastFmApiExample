@@ -41,4 +41,5 @@ public class Album {
     public List<AlbumImage> getImages() {
         return images;
     }
+
 }

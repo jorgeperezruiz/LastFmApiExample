@@ -4,8 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lastfm.akudreams.lastfmtest.models.Album;
 
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ public class AlbumsGridRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     }
 
     public void clear() {
+        // TODO useful for pagination
         this.albums.clear();
         notifyDataSetChanged();
     }
@@ -51,14 +54,20 @@ public class AlbumsGridRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     class AlbumViewHolder extends RecyclerView.ViewHolder {
 
         private TextView titleTextView;
+        private ImageView albumImageView;
 
         AlbumViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.album_title);
+            albumImageView = itemView.findViewById(R.id.album_thumbnail);
         }
 
         void updateWith(Album album) {
             titleTextView.setText(album.getName());
+            if (album.getImages().size() > 2) {
+                Glide.with(albumImageView.getContext()).load(album.getImages().get(1).getUrl()).into(albumImageView);
+            }
         }
+
     }
 }
