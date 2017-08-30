@@ -2,7 +2,6 @@ package com.lastfm.akudreams.lastfmtest;
 
 import android.util.Log;
 
-import com.google.gson.stream.JsonReader;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.lastfm.akudreams.lastfmtest.models.Album;
 
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,8 +29,8 @@ public class NetworkService {
         lastFmApi = builder.build().create(LastFmApi.class);
     }
 
-    public void searchAlbums(String searchWord, SearchAlbumListener searchAlbumListener) {
-        lastFmApi.searchAlbums(createParamsToSearchAlbum(searchWord))
+    public Disposable searchAlbums(String searchWord, SearchAlbumListener searchAlbumListener) {
+        return lastFmApi.searchAlbums(createParamsToSearchAlbum(searchWord))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {

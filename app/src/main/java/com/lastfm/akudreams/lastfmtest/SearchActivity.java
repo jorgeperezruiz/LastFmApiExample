@@ -11,9 +11,12 @@ import com.lastfm.akudreams.lastfmtest.models.Album;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
 public class SearchActivity extends AppCompatActivity implements SearchAlbumListener {
 
     private AlbumsGridRecyclerViewAdapter albumsAdapter;
+    private Disposable disposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +41,20 @@ public class SearchActivity extends AppCompatActivity implements SearchAlbumList
 
         @Override
         public void onSearchAction(String currentQuery) {
-            new NetworkService().searchAlbums(currentQuery, SearchActivity.this);
+            disposable = new NetworkService().searchAlbums(currentQuery, SearchActivity.this);
         }
     };
 
     @Override
     public void onAlbumsLoaded(List<Album> albums) {
         albumsAdapter.add(albums);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (disposable != null) {
+            disposable.dispose();
+        }
+        super.onDestroy();
     }
 }

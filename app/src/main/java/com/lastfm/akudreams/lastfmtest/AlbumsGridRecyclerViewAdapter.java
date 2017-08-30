@@ -1,8 +1,6 @@
 package com.lastfm.akudreams.lastfmtest;
 
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,12 +43,6 @@ public class AlbumsGridRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public int getItemCount() {
         return albums.size();
-    }
-
-    public void clear() {
-        // TODO useful for pagination
-        this.albums.clear();
-        notifyDataSetChanged();
     }
 
     public void add(List<Album> albums) {
